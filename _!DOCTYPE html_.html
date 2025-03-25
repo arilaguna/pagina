@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablas de Multiplicar - Divertidas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffebcc;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #ff6600;
+        }
+        .question {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        .animal {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+        input {
+            font-size: 18px;
+            padding: 8px;
+            width: 100px;
+            text-align: center;
+            border: 2px solid #754728;
+            border-radius: 5px;
+        }
+        button {
+            font-size: 18px;
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #e65c00;
+        }
+        .result {
+            font-size: 22px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐯🐵 Practica las Tablas de Multiplicar 🦁🐸</h1>
+        <div class="animal">🐘</div>
+        <div class="question" id="question"></div>
+        <input type="number" id="answer" placeholder="Tu respuesta">
+        <br>
+        <button onclick="checkAnswer()">Verificar</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        let num1, num2, correctAnswer;
+        const animals = ["🐵", "🐶", "🐰", "🐷", "🦊", "🐸", "🐻", "🐯", "🐘", "🦁"];
+        
+        function generateQuestion() {
+            num1 = Math.floor(Math.random() * 10) + 1;
+            num2 = Math.floor(Math.random() * 10) + 1;
+            correctAnswer = num1 * num2;
+            
+            document.getElementById("question").innerText = `${num1} × ${num2} = ?`;
+            document.getElementById("result").innerText = "";
+            document.getElementById("answer").value = "";
+            document.querySelector(".animal").innerText = animals[Math.floor(Math.random() * animals.length)];
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(document.getElementById("answer").value);
+            const resultText = document.getElementById("result");
+
+            if (userAnswer === correctAnswer) {
+                resultText.innerText = "¡Correcto! 🎉";
+                resultText.className = "result correct";
+            } else {
+                resultText.innerText = "¡Inténtalo de nuevo! ❌";
+                resultText.className = "result incorrect";
+            }
+
+            setTimeout(generateQuestion, 2000);
+        }
+
+        generateQuestion();
+    </script>
+</body>
+</html>
